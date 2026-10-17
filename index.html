@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindPulse · Mental Health Score Predictor</title>
+  <meta name="description" content="Predict a student's mental health score from social media habits, sleep, stress and lifestyle." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Ambient background -->
+  <div class="bg">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+    <span class="grain"></span>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span class="brand-name">Mind<em>Pulse</em></span>
+    </div>
+    <div class="api-status" id="apiStatus" title="Backend connection status">
+      <span class="pulse"></span><span id="apiStatusText">Checking API…</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- Hero -->
+    <section class="hero">
+      <p class="eyebrow">AI · Wellbeing Intelligence</p>
+      <h1>Know your <em>mind</em>,<br />before the scroll decides.</h1>
+      <p class="lead">
+        Tell us about your day — screens, sleep, stress, study. Our machine-learning
+        model reads the pattern and estimates your mental health score in seconds.
+      </p>
+      <ul class="hero-stats">
+        <li><strong>12</strong><span>signals analysed</span></li>
+        <li><strong>1&nbsp;sec</strong><span>to predict</span></li>
+        <li><strong>100%</strong><span>private, runs locally</span></li>
+      </ul>
+    </section>
+
+    <!-- Form + Result -->
+    <section class="grid">
+      <form id="predictForm" class="card glass" novalidate autocomplete="off">
+        <div class="card-head">
+          <h2>Your profile</h2>
+          <p>Fill in the details below.</p>
+        </div>
+
+        <!-- 01 About you -->
+        <fieldset>
+          <legend><span class="step">01</span> About you</legend>
+          <div class="row">
+            <label class="field">
+              <span>Age</span>
+              <input type="number" id="age" min="10" max="100" value="21" required />
+            </label>
+            <label class="field">
+              <span>Gender</span>
+              <select id="gender" required>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+              </select>
+            </label>
+          </div>
+          <div class="row">
+            <label class="field">
+              <span>Country</span>
+              <input type="text" id="country" list="countryList" value="India" placeholder="Start typing…" required />
+              <datalist id="countryList">
+                <option value="India"></option>
+                <option value="USA"></option>
+                <option value="Canada"></option>
+                <option value="Australia"></option>
+                <option value="UK"></option>
+                <option value="Germany"></option>
+                <option value="Mexico"></option>
+                <option value="Turkey"></option>
+                <option value="France"></option>
+                <option value="Other"></option>
+              </datalist>
+            </label>
+            <label class="field">
+              <span>Academic level</span>
+              <select id="academic_level" required>
+                <option value="Undergraduate">Undergraduate</option>
+                <option value="Graduate">Graduate</option>
+                <option value="High School">High School</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- 02 Social media -->
+        <fieldset>
+          <legend><span class="step">02</span> Social media habits</legend>
+          <div class="row">
+            <label class="field">
+              <span>Most used platform</span>
+              <select id="most_used_platform" required>
+                <option>Instagram</option>
+                <option>Facebook</option>
+                <option>LinkedIn</option>
+                <option>Snapchat</option>
+                <option>Twitter</option>
+                <option>YouTube</option>
+                <option>TikTok</option>
+                <option>WhatsApp</option>
+                <option>WeChat</option>
+                <option>LINE</option>
+                <option>KakaoTalk</option>
+                <option>VKontakte</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Purpose of use</span>
+              <select id="purpose_of_use" required>
+                <option>Entertainment</option>
+                <option>Networking</option>
+                <option>Education</option>
+                <option>News</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="slider">
+            <div class="slider-top"><span>Avg. daily usage</span><output id="o_usage">4.0 h</output></div>
+            <input type="range" id="avg_daily_usage_hours" min="0" max="24" step="0.5" value="4" />
+          </label>
+
+          <label class="field">
+            <span>Phone unlocks per day</span>
+            <input type="number" id="daily_unlocks" min="0" value="60" required />
+          </label>
+        </fieldset>
+
+        <!-- 03 Lifestyle -->
+        <fieldset>
+          <legend><span class="step">03</span> Daily lifestyle</legend>
+
+          <label class="slider">
+            <div class="slider-top"><span>Study hours</span><output id="o_study">3.0 h</output></div>
+            <input type="range" id="study_hours" min="0" max="24" step="0.5" value="3" />
+          </label>
+
+          <label class="slider">
+            <div class="slider-top"><span>Physical activity</span><output id="o_activity">1.0 h</output></div>
+            <input type="range" id="physical_activity_hours" min="0" max="24" step="0.5" value="1" />
+          </label>
+
+          <label class="slider">
+            <div class="slider-top"><span>Sleep per night</span><output id="o_sleep">7.0 h</output></div>
+            <input type="range" id="sleep_hours_per_night" min="0" max="24" step="0.5" value="7" />
+          </label>
+
+          <div class="field">
+            <span>Stress level</span>
+            <div class="pills" id="stressPills" role="radiogroup" aria-label="Stress level">
+              <button type="button" class="pill" data-value="Low" role="radio">Low</button>
+              <button type="button" class="pill active" data-value="Medium" role="radio">Medium</button>
+              <button type="button" class="pill" data-value="High" role="radio">High</button>
+              <button type="button" class="pill" data-value="Very High" role="radio">Very High</button>
+            </div>
+          </div>
+        </fieldset>
+
+        <p class="error" id="errorBox" role="alert" hidden></p>
+
+        <button type="submit" class="cta" id="submitBtn">
+          <span class="cta-label">Predict my score</span>
+          <span class="spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+
+      <!-- Result -->
+      <aside class="card glass result" id="resultCard" aria-live="polite">
+        <div class="card-head">
+          <h2>Your result</h2>
+          <p>Predicted mental health score</p>
+        </div>
+
+        <div class="gauge-wrap">
+          <svg class="gauge" viewBox="0 0 200 200" aria-hidden="true">
+            <defs>
+              <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ff3d9a" />
+                <stop offset="55%" stop-color="#b44dff" />
+                <stop offset="100%" stop-color="#3de8ff" />
+              </linearGradient>
+            </defs>
+            <circle class="gauge-track" cx="100" cy="100" r="84" />
+            <circle class="gauge-bar" id="gaugeBar" cx="100" cy="100" r="84" />
+          </svg>
+          <div class="gauge-center">
+            <span class="score" id="scoreValue">–</span>
+            <span class="score-max">out of 10</span>
+          </div>
+        </div>
+
+        <div class="verdict" id="verdict">
+          <h3 id="verdictTitle">Awaiting your data</h3>
+          <p id="verdictText">Complete the form and press <b>Predict</b> to see your personalised estimate.</p>
+        </div>
+
+        <div class="tips" id="tips" hidden>
+          <h4>Small shifts that help</h4>
+          <ul id="tipsList"></ul>
+        </div>
+
+        <p class="disclaimer">
+          This is a statistical estimate for educational purposes, not a medical diagnosis.
+          If you're struggling, please talk to a qualified professional.
+        </p>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Built with FastAPI · scikit-learn · ♥ MindPulse</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
