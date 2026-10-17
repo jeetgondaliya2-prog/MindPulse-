@@ -63,21 +63,7 @@ The project covers the whole data science lifecycle:
 
 ## 🖼️ Live Demo Preview
 
-> 📸 **Add your screenshots here** (create a `docs/` folder, drop the images in, and the links below will render).
 
-<div align="center">
-
-| Input Form | Prediction Result |
-|:---:|:---:|
-| ![Form](docs/screenshot-form.png) | ![Result](docs/screenshot-result.png) |
-
-| Swagger API Docs (`/docs`) | Mobile View |
-|:---:|:---:|
-| ![Docs](docs/screenshot-docs.png) | ![Mobile](docs/screenshot-mobile.png) |
-
-</div>
-
-> 💡 **Tip:** Take screenshots after running the app, save them as `docs/screenshot-form.png`, `docs/screenshot-result.png`, etc., then commit the `docs/` folder.
 
 ---
 
