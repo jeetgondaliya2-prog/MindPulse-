@@ -63,7 +63,7 @@ The project covers the whole data science lifecycle:
 
 ## 🖼️ Live Demo Preview
 
-
+LINK : https://mindpulse-2.onrender.com
 
 ---
 
