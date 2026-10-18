@@ -1,7 +1,7 @@
 /* ============ MindPulse · Frontend logic ============ */
 
 // 👉 Change this if your FastAPI server runs on a different host/port
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://mindpulse-1-dpih.onrender.com";
 
 // The dataset score is assumed to be on a 0–10 scale. Adjust if your model differs.
 const SCORE_MAX = 10;
